@@ -1,0 +1,89 @@
+Co warto wiedzieć o x86-64:
+---------
+Rejestry:
+8 głownych jak w x86 (są one 64 bitowe):
+- RAX (połowa to EAX)
+- RBX (EBX)
+- RCX (ECX)
+- RDX (ECX)
+- RDP (EBP)
+- RSI (ESI)
+- RDI (EDI)
+- RSP (ESP)
+7 dodatkowych:
+- R8
+- R9
+- R10
+- R11
+- R12
+- R13
+- R14
+- R15
+Wszystkie te rejestry mogą być dostępne przez ich części np. 32 bity, 16 bity, 8 bity
+-----------
+Mogą być różne instrukcje w zależności od rozmaru arguemntów np.
+add służy do dodawania 32 bitowych albo 64 bitowych arguemntów,
+a addw do 16 bitowych arguemntów
+-----------
+Mnożenie i dzielenie przez potęgi 2 wykonuj przesunięciami tak jak w RISK-V
+-----------
+Do mnożenia przez np. przez 2, 3, 4, 5, 8, 9 można użyć funkcji LEA
+albo do dodawania wieloargumentowego
+-----------
+Przy dzieleniu liczb pamiętaj o rozszerzeniu dzielnej, tak żeby miała
+dwa razy większą długość niż dzielnik
+-----------
+Ile bajtów mamy na myśli jeśli mówimy w x86 (oraz x86-64) o:
+- byte - 8 bitów        - fword - 48 bitów
+- word - 16 bitów       - qword - 64 bitów
+- dword - 32 bitów
+-----------
+W niektórych sytuacjach potrzebna jest jawna specifykacja rozmiaru w NASM:
+movzx eax, byte [esi] -> movzx służy do dodawania różnych długości arguemtnów, tutaj byte [esi] rozszerza zerami do 32 bitów i robi dodawanie
+inc word [ebx] -> mimo, że ebx jest 32 bitowe, to my chcemy dokonać inc na 16 bitach, choć jakbyśmy tego nie dali nic by się nie stało
+w większości przypadków na podstawie rejestrów jest dedykowana rozmiar arguemntów, jeśli są różne to warto dopisać
+-----------
+Zerowanie rejestrów przez:
+xor eax, eax
+-----------
+Dla argumentów, które nie są zmiennopozycyjne, będzie to wyglądać tak:
+- 1. argument -> RDI
+- 2. argument -> RSI
+- 3. argument -> RDX
+- 4. argument -> RCX
+- 5. argument -> R8
+- 6. argument -> R9
+-----------
+RSP i RBP to wiadomo, robisz według prologu i epilogu, ale w przypadku
+używania innych rejestrów pamiętaj, żeby sprawdzac czy muszą być one zapisywane
+
+Zapisywane rejestry: R12 - R15, RBX, no i te na górze
+
+Aby zwrócić wartość robisz np.
+mov rax, 42
+epilog funkcji ...
+-----------
+Adresy są przechowywane na 64 bitach
+-----------
+Praca przy zmiennoprzecinkowych wartościach float:
+- floaty są na 32 bitach, double na 64 bitach
+- rejestry do przechowywania floatów/double to xmm0 - xmm7 (nie muszą być zachowywane, można robić co się chce)
+
+-------------
+Wykonywanie funkcji w x64:
+call my_function -> zapisuje sobie ślad powrotu na sebastian_abramowski_arko_projekt_x86
+.... (lecimy do my_function)
+my_function:
+    ; do sth
+
+    mov rax, 1337 ; zwracamy w rax wartość 123
+    mov rdx, 69   ; zwracamy w edx drugą wartość - 69
+    ret -> powracamy do miejsca zapisanego na stosie
+...
+--------------
+WAŻNE!!
+ucomiss do porównywania liczb zmiennoprzecikowych nie ustawia znaczników,
+które później sugerowałyby skok taki jak np. jl, jg ...
+--------------
+https://github.com/las-nish/NASM-Assembly-Collection
+--------------

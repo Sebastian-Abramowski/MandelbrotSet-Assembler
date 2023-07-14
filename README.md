@@ -1,6 +1,6 @@
-## Results in x64 and SDL library using C
+## Results in x64 (for creating mandelbrot set) and SDL library using Cpp (for interactive result (zooming in, out, moving etc.))
 
----
+## ![x64-the-result](x64-mandelbrot/Screens/example_mandelbrot.png)
 
 #### Result in RARS simulator
 

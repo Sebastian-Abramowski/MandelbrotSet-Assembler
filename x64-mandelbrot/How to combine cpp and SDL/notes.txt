@@ -1,0 +1,14 @@
+Jak odpalić main.cpp żeby sprawdzić działanie SDLa bez robienia makefile:
+- g++ main.cpp -o main -lSDL2
+- ./main
+
+Jak to odpalić:
+- make
+- ./main
+
+Jak są rozmieszone pixele w tym:
+Uint32* pixels = new Uint32[WIDTH * HEIGHT];
+piksele są tak rozmieszczone, że
+Lewy górny róg (0, 0)
+w prawo zwiększa się x
+w dół zwiększa się y
