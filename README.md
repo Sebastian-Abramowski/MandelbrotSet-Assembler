@@ -1,6 +1,12 @@
-## Results in x64 (for creating mandelbrot set) and SDL library using Cpp (for interactive result (zooming in, out, moving etc.))
+# x64
+
+#### Results in x64 (mandelbrot set) and SDL library using Cpp (showing interactive result)
 
 ## ![x64-the-result](x64-mandelbrot/Screens/example_mandelbrot.png)
+
+---
+
+# RISK-V
 
 #### Result in RARS simulator
 
