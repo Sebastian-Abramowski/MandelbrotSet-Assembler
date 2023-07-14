@@ -28,4 +28,4 @@ Potrzebne: g++, nasm, make, sdl
 
 ### Jak wygląda
 
-![Example](/Screens/mandel1.png)
+![Example](Screens/mandel1.png)
